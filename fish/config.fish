@@ -31,6 +31,10 @@ if status is-interactive
     abbr ll 'ls -l'
     abbr la 'ls -a'
     abbr lla 'ls -la'
+    abbr install 'sudo pacman -S'
+    abbr update 'sudo pacman -Syu'
+    abbr i 'paru -S'
+    abbr v 'nvim'
 
     # Custom colours
     cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
