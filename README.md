@@ -1,143 +1,177 @@
-# caelestia
+# quickshell-dots
 
-This is the main repo of the caelestia dots and contains the user configs for
-apps. This repo also includes an install script to install the entire dots.
+> My personal fork of the [caelestia dots](https://github.com/caelestia-dots/caelestia) — a complete Hyprland rice tweaked to my preferences.
+
+This is the full caelestia setup (shell + all app configs) with personal modifications pushed as I make them. If you want the original, polished upstream experience, head to [caelestia-dots/caelestia](https://github.com/caelestia-dots/caelestia). If you want to see what I've changed or use this as a base for your own tweaks, you're in the right place.
+
+---
+
+## What's different from upstream
+
+- Custom ASCII art / figlet banner (replaced the default caelestia logo)
+- Personal preference tweaks pushed incrementally
+
+More changes may be added over time.
+
+---
+
+## Stack
+
+| Role | Tool |
+|---|---|
+| Window manager | [Hyprland](https://hyprland.org) |
+| Shell | [Quickshell](https://quickshell.outfoxxed.me) (via [caelestia-shell](https://github.com/caelestia-dots/shell)) |
+| Terminal | [foot](https://codeberg.org/dnkl/foot) |
+| Shell (CLI) | [fish](https://fishshell.com) + [starship](https://starship.rs) |
+| System monitor | [btop](https://github.com/aristocratos/btop) |
+| Fetch | [fastfetch](https://github.com/fastfetch-cli/fastfetch) |
+| File manager | [Thunar](https://docs.xfce.org/xfce/thunar/start) |
+| Editor | [VSCodium](https://vscodium.com) / [Zed](https://zed.dev) |
+| Browser | [Floorp Browser](https://floorp.app/) |
+| Music | [Spotify](https://spotify.com) + [Spicetify](https://spicetify.app) |
+| Session manager | [uwsm](https://github.com/Vladimir-csp/uwsm) |
+| Base dots | [caelestia](https://github.com/caelestia-dots) |
+
+---
 
 ## Installation
 
-Simply clone this repo and run the install script (you need
-[`fish`](https://github.com/fish-shell/fish-shell) installed).
+### Quick install (Arch Linux)
 
-> [!WARNING]
-> The install script symlinks all configs into place, so you CANNOT
-> move/remove the repo folder once you run the install script. If
-> you do, most apps will not behave properly and some (e.g. Hyprland)
-> will fail to start completely. I recommend cloning the repo to
-> `~/.local/share/caelestia`.
+You need [`fish`](https://github.com/fish-shell/fish-shell) installed first.
 
-The install script has some options for installing configs for some apps.
+```bash
+git clone https://github.com/Blaze2216/quickshell-dots.git ~/.local/share/caelestia
+~/.local/share/caelestia/install.fish
+```
+
+> **Warning:** The install script symlinks configs into place, so do **not** move or delete the cloned folder afterwards. If you do, apps like Hyprland will fail to start. `~/.local/share/caelestia` is the recommended location.
+
+The install script accepts optional flags:
 
 ```
-$ ./install.fish -h
-usage: ./install.sh [-h] [--noconfirm] [--spotify] [--vscode] [--discord] [--aur-helper]
+usage: ./install.fish [-h] [--noconfirm] [--spotify] [--vscode] [--discord] [--zen] [--aur-helper]
 
 options:
   -h, --help                  show this help message and exit
-  --noconfirm                 do not confirm package installation
-  --spotify                   install Spotify (Spicetify)
-  --vscode=[codium|code]      install VSCodium (or VSCode)
-  --discord                   install Discord (OpenAsar + Equicord)
+  --noconfirm                 skip confirmation prompts
+  --spotify                   install Spotify with Spicetify theming
+  --vscode=[codium|code]      install VSCodium or VSCode
+  --discord                   install Discord with OpenAsar + Equicord
   --zen                       install Zen browser
-  --aur-helper=[yay|paru]     the AUR helper to use
+  --aur-helper=[yay|paru]     AUR helper to use (default: yay)
 ```
 
-For example:
+Example with optional apps:
 
-```sh
-git clone https://github.com/caelestia-dots/caelestia.git ~/.local/share/caelestia
-~/.local/share/caelestia/install.fish
+```bash
+~/.local/share/caelestia/install.fish --spotify --vscode=codium --zen --aur-helper=paru
 ```
 
 ### Manual installation
 
-Dependencies:
+Install the following dependencies:
 
--   hyprland
--   xdg-desktop-portal-hyprland
--   xdg-desktop-portal-gtk
--   hyprpicker
--   wl-clipboard
--   cliphist
--   inotify-tools
--   app2unit
--   wireplumber
--   trash-cli
--   foot
--   fish
--   fastfetch
--   starship
--   btop
--   jq
--   eza
--   adw-gtk-theme
--   papirus-icon-theme
--   qtengine-git
--   ttf-jetbrains-mono-nerd
+**Core:**
+`hyprland`, `xdg-desktop-portal-hyprland`, `xdg-desktop-portal-gtk`, `hyprpicker`, `wl-clipboard`, `cliphist`, `inotify-tools`, `app2unit`, `wireplumber`, `trash-cli`
 
-Install all dependencies and follow the installation guides of the
-[shell](https://github.com/caelestia-dots/shell) and [cli](https://github.com/caelestia-dots/cli)
-to install them.
+**Apps:**
+`foot`, `fish`, `fastfetch`, `starship`, `btop`, `jq`, `eza`
 
-> [!TIP]
-> If on Arch or an Arch-based distro, there is a meta package available [in this repository](PKGBUILD)
-> that pulls in all dependencies. It can be installed through the install script, makepkg/pacman, yay,
-> paru, or your preferred AUR helper.
+**Theming:**
+`adw-gtk-theme`, `papirus-icon-theme`, `qtengine-git`, `ttf-jetbrains-mono-nerd`
 
-Then copy or symlink the `hypr`, `foot`, `fish`, `fastfetch`, `uwsm` and `btop` folders to the
-`$XDG_CONFIG_HOME` (usually `~/.config`) directory. e.g. `hypr -> ~/.config/hypr`.
-Copy `starship.toml` to `$XDG_CONFIG_HOME/starship.toml`.
+Then install [caelestia-shell](https://github.com/caelestia-dots/shell#manual-installation) and [caelestia-cli](https://github.com/caelestia-dots/cli) separately.
 
-#### Installing Spicetify configs:
+Finally, symlink the config folders into `~/.config`:
 
-Follow the Spicetify [installation instructions](https://spicetify.app/docs/advanced-usage/installation),
-copy or symlink the `spicetify` folder to `$XDG_CONFIG_HOME/spicetify` and run
+```bash
+ln -sf ~/.local/share/caelestia/hypr       ~/.config/hypr
+ln -sf ~/.local/share/caelestia/foot       ~/.config/foot
+ln -sf ~/.local/share/caelestia/fish       ~/.config/fish
+ln -sf ~/.local/share/caelestia/fastfetch  ~/.config/fastfetch
+ln -sf ~/.local/share/caelestia/btop       ~/.config/btop
+ln -sf ~/.local/share/caelestia/uwsm       ~/.config/uwsm
+cp     ~/.local/share/caelestia/starship.toml ~/.config/starship.toml
+```
 
-```sh
+#### Optional: Spicetify
+
+```bash
+ln -sf ~/.local/share/caelestia/spicetify ~/.config/spicetify
 spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace
 spicetify apply
 ```
 
-#### Installing VSCode/VSCodium configs:
+#### Optional: VSCode / VSCodium
 
-Install VSCode or VSCodium, then copy or symlink `vscode/settings.json` and
-`vscode/keybindings.json` into the `$XDG_CONFIG_HOME/Code/User` (or `$XDG_CONFIG_HOME/VSCodium/User`
-if using VSCodium) folder. Then copy or symlink `vscode/flags.conf` to `$XDG_CONFIG_HOME/code-flags.conf`
-(or `$XDG_CONFIG_HOME/codium-flags.conf` if using VSCodium).
-
-Finally, install the extension VSIX from `vscode/caelestia-vscode-integration`.
-
-```sh
-# Use `codium` if using VSCodium
-code --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
+```bash
+# For VSCodium (replace VSCodium with Code for VSCode):
+ln -sf ~/.local/share/caelestia/vscode/settings.json    ~/.config/VSCodium/User/settings.json
+ln -sf ~/.local/share/caelestia/vscode/keybindings.json ~/.config/VSCodium/User/keybindings.json
+ln -sf ~/.local/share/caelestia/vscode/flags.conf       ~/.config/codium-flags.conf
+codium --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
 ```
 
-#### Installing Zen Browser configs:
+#### Optional: Zen Browser
 
-Install Zen Browser, then copy or symlink `zen/userChrome.css` to the `chrome` folder in your
-profile of choice in `~/.zen`. e.g. `zen/userChrome.css -> ~/.zen/<profile>/chrome/userChrome.css`.
+```bash
+# Symlink userChrome.css into your Zen profile:
+ln -sf ~/.local/share/caelestia/zen/userChrome.css ~/.zen/<your-profile>/chrome/userChrome.css
 
-Now install the native app by copying `zen/native_app/manifest.json` to
-`~/.mozilla/native-messaging-hosts/caelestiafox.json` and replacing the `{{ $lib }}` string in it
-with the absolute path of `~/.local/lib/caelestia` (this must be the absolute path, e.g.
-`/home/user/.local/lib/caelestia`). Then copy or symlink `zen/native_app/app.fish` to
-`~/.local/lib/caelestia/caelestiafox`.
+# Install native messaging host (replace /home/youruser with your actual home path):
+cp ~/.local/share/caelestia/zen/native_app/manifest.json ~/.mozilla/native-messaging-hosts/caelestiafox.json
+# Edit caelestiafox.json — replace {{ $lib }} with the absolute path to ~/.local/lib/caelestia
+ln -sf ~/.local/share/caelestia/zen/native_app/app.fish ~/.local/lib/caelestia/caelestiafox
+```
 
-Finally, install the CaelestiaFox extension from [here](https://addons.mozilla.org/en-US/firefox/addon/caelestiafox).
+Then install the [CaelestiaFox extension](https://addons.mozilla.org/en-US/firefox/addon/caelestiafox).
 
-## Updating
-
-Simply run `yay` to update the AUR packages, then `cd` into the repo directory and run `git pull` to update the configs.
+---
 
 ## Usage
 
-> [!NOTE]
-> These dots do not contain a login manager (for now), so you must install a
-> login manager yourself unless you want to log in from a TTY. I recommend
-> [`greetd`](https://sr.ht/~kennylevinsen/greetd) with
-> [`tuigreet`](https://github.com/apognu/tuigreet), however you can use
-> any login manager you want.
+> These dots don't include a login manager. You'll need to set one up yourself (e.g. [`greetd`](https://sr.ht/~kennylevinsen/greetd) + [`tuigreet`](https://github.com/apognu/tuigreet)) or log in from a TTY.
 
-There aren't really any usage instructions... these are a set of dotfiles.
+### Keybinds
 
-Here's a list of useful keybinds though:
+| Keybind | Action |
+|---|---|
+| `Super` | Open launcher |
+| `Super` + `1–9` | Switch to workspace |
+| `Super` `Alt` + `1–9` | Move window to workspace |
+| `Super` + `Return` | Open terminal (foot) |
+| `Super` + `B` | Open browser (Floorp) |
+| `Super` + `C` | Open editor (VSCodium) |
+| `Super` + `S` | Toggle special workspace |
+| `Ctrl` `Alt` + `Delete` | Open session menu |
+| `Ctrl` `Super` + `Space` | Toggle media play/pause |
+| `Ctrl` `Super` `Alt` + `R` | Restart the shell |
 
--   `Super` - open launcher
--   `Super` + `#` - switch to workspace `#`
--   `Super` `Alt` + `#` - move window to workspace `#`
--   `Super` + `T` - open terminal (foot)
--   `Super` + `W` - open browser (zen)
--   `Super` + `C` - open IDE (vscodium)
--   `Super` + `S` - toggle special workspace or close current special workspace
--   `Ctrl` `Alt` + `Delete` - open session menu
--   `Ctrl` `Super` + `Space` - toggle media play state
--   `Ctrl` `Super` `Alt` + `R` - restart the shell
+All shell keybinds work via Hyprland global shortcuts and can be customised in the hypr config.
+
+---
+
+## Updating
+
+```bash
+yay  # update AUR packages
+
+cd ~/.local/share/caelestia
+git pull  # pull latest config changes
+```
+
+---
+
+## Credits
+
+All the real work is by the caelestia-dots team. Big thanks to:
+
+- [@soramanew](https://github.com/soramanew) — for building and maintaining the entire caelestia ecosystem
+- [@outfoxxed](https://github.com/outfoxxed) — for creating [Quickshell](https://quickshell.outfoxxed.me)
+
+---
+
+## License
+
+GPL-3.0 — same as upstream. See [LICENSE](./LICENSE).
