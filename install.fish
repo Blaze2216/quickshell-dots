@@ -84,15 +84,15 @@ set -l install_dir (path dirname (path resolve (status filename)))
 # Startup prompt
 set_color magenta
 echo '╭─────────────────────────────────────────────────╮'
-echo '│      ______           __          __  _         │'
-echo '│     / ____/___ ____  / /__  _____/ /_(_)___ _   │'
-echo '│    / /   / __ `/ _ \/ / _ \/ ___/ __/ / __ `/   │'
-echo '│   / /___/ /_/ /  __/ /  __(__  ) /_/ / /_/ /    │'
-echo '│   \____/\__,_/\___/_/\___/____/\__/_/\__,_/     │'
+echo '│            ____  __                             │'
+echo '│           / __ )/ /___ _____  ___               │'
+echo '│          / __  / / __ `/_  / / _ \              │'
+echo '│         / /_/ / / /_/ / / /_/  __/              │'
+echo '│        /_____/_/\__,_/ /___/\___/               │'
 echo '│                                                 │'
 echo '╰─────────────────────────────────────────────────╯'
 set_color normal
-log 'Welcome to the Caelestia dotfiles installer!'
+log 'Welcome to the Blaze dotfiles installer!'
 log 'Before continuing, please ensure you have made a backup of your config directory.'
 
 # Prompt for backup
